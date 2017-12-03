@@ -3,6 +3,8 @@ Basic ubuntu16 installation along with apache, mysql and PHP7 Added modules are 
 
 # Ubuntu 16 Server with PHP 7 - Apache - Mysql
 
+[![](https://images.microbadger.com/badges/image/shinigamigood/docker-ubuntu16-lamp-xdebug-ssl-phpunit.svg)](https://microbadger.com/images/shinigamigood/docker-ubuntu16-lamp-xdebug-ssl-phpunit "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/shinigamigood/docker-ubuntu16-lamp-xdebug-ssl-phpunit.svg)](https://microbadger.com/images/shinigamigood/docker-ubuntu16-lamp-xdebug-ssl-phpunit "Get your own version badge on microbadger.com")
+
 This creates a Docker container running PHP, Apache, and Mysql on ubuntu 16
 
 ## Why another container?  
