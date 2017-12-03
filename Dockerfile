@@ -1,4 +1,19 @@
 FROM ubuntu:16.04
+MAINTAINER Jaouher Kharrat<kharrat_jaouher@hotmail.fr>
+
+ # Build-time metadata as defined at http://label-schema.org
+    ARG BUILD_DATE
+    ARG VCS_REF
+    ARG VERSION
+    LABEL org.label-schema.build-date=$BUILD_DATE \
+          org.label-schema.name="docker ubuntu16 lamp-xdebug ssl phpunit " \
+          org.label-schema.description="Basic ubuntu16 installation along with apache, mysql and PHP7 Added modules are Xdebug-SSL-PHPUnit" \
+          org.label-schema.url="https://github.com/JaouherK/docker-ubuntu16-lamp-xdebug-ssl-phpunit/edit/master/Dockerfile" \
+          org.label-schema.vcs-ref=$VCS_REF \
+          org.label-schema.vcs-url="https://github.com/JaouherK/docker-ubuntu16-lamp-xdebug-ssl-phpunit/edit/master/Dockerfile" \
+          org.label-schema.vendor="Shinigami" \
+          org.label-schema.version=$VERSION \
+          org.label-schema.schema-version="1.0"
 
 ## ***********************************************************************
 # Server update and basic install tools
