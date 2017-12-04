@@ -2,9 +2,7 @@ FROM ubuntu:16.04
 MAINTAINER Jaouher Kharrat<kharrat_jaouher@hotmail.fr>
 
  # Build-time metadata as defined at http://label-schema.org
-    ARG BUILD_DATE=04-12-2017
-    ARG VCS_REF=R1v2
-    ARG VERSION=1.0
+    ARG BUILD_DATE=04-12-2017,VCS_REF=R1v2,VERSION=1.0
     LABEL org.label-schema.build-date=$BUILD_DATE \
           org.label-schema.name="docker ubuntu16 lamp-xdebug ssl phpunit " \
           org.label-schema.description="Basic ubuntu16 installation along with apache, mysql and PHP7 Added modules are Xdebug-SSL-PHPUnit" \
@@ -19,14 +17,15 @@ MAINTAINER Jaouher Kharrat<kharrat_jaouher@hotmail.fr>
 # Server update and basic install tools
 ## ***********************************************************************
 RUN apt-get update && \
-    apt-get install -y wget curl software-properties-common python3-software-properties python-software-properties unzip
-
-
-## ***********************************************************************
-# Apache
-## ***********************************************************************
-RUN apt-get install -y apache2
-RUN service apache2 restart
+    apt-get install -y wget \
+            curl \
+            software-properties-common \
+            python3-software-properties \
+            python-software-properties \
+            unzip \
+            vim \
+            bash-completion \
+            apache2
 
 ## ***********************************************************************
 # PHP / Mysql and relative modules
@@ -37,11 +36,34 @@ RUN export LANG=C.UTF-8 && \
     add-apt-repository ppa:ondrej/php && \
     apt-get update
 
-RUN apt-get install -y libapache2-mod-php7.0 libzend-framework-php php7.0 php7.0-bcmath \
-    php7.0-bz2 php7.0-cgi php7.0-common php7.0-curl php7.0-fpm php7.0-gd php7.0-gmp \
-    php-http php-imagick php7.0-imap php7.0-intl php7.0-json php7.0-ldap php7.0-mbstring \
-    php7.0-mbstring php7.0-mcrypt php-memcache php-memcached php7.0-mysql php7.0-recode \
-    php7.0-soap php-xdebug php7.0-xml php7.0-xsl php7.0-zip vim bash-completion unzip \
+RUN apt-get install -y libapache2-mod-php7.0 \
+                        libzend-framework-php \
+                        php7.0 \
+                        php7.0-bcmath \
+                        php7.0-bz2 \
+                        php7.0-cgi \
+                        php7.0-common \
+                        php7.0-curl \
+                        php7.0-fpm \
+                        php7.0-gd \
+                        php7.0-gmp \
+                        php-http \
+                        php-imagick \
+                        php7.0-imap \
+                        php7.0-intl \
+                        php7.0-json \
+                        php7.0-ldap \
+                        php7.0-mbstring \
+                        php7.0-mcrypt \
+                        php-memcache \
+                        php-memcached \
+                        php7.0-mysql \
+                        php7.0-recode \
+                        php7.0-soap \
+                        php-xdebug \
+                        php7.0-xml \
+                        php7.0-xsl \
+                        php7.0-zip \
     ## To install mysql while forcing the user to root and password to empty
 && { \
         echo debconf debconf/frontend select Noninteractive; \
@@ -77,6 +99,26 @@ RUN ["bin/bash", "-c", "echo xdebug.remote_enable=1 >> /etc/php/7*/apache2/php.i
 RUN ["bin/bash", "-c", "echo xdebug.remote_connect_back=1 >> /etc/php/7*/apache2/php.ini"]
 RUN ["bin/bash", "-c", "echo xdebug.idekey=netbeans-xdebug >> /etc/php/7*/apache2/php.ini"]
 
+## ***********************************************************************
+##  IONCUBE 7.0
+## ***********************************************************************
+
+# prepare folder for ioncube
+RUN mkdir /tmp/ioncube_install
+WORKDIR /tmp/ioncube_install
+
+# download ioncube files
+RUN wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
+    && tar xvfz ioncube_loaders_lin_x86-64.tar.gz \
+    &&  cp ioncube/ioncube_loader_lin_7.0.so /usr/lib/php/20170718/ioncube_loader_lin_7.0.so \
+    &&  rm -rf /tmp/ioncube_install
+
+WORKDIR /
+
+# ioncube.ini
+RUN ["bin/bash", "-c", "cd /etc/php/7.0/apache2/conf.d && echo zend_extension = /usr/lib/php/20170718/ioncube_loader_lin_7.0.so > 00-ioncube.ini"]
+RUN ["bin/bash", "-c", "cd /etc/php/7.0/cli/conf.d && echo zend_extension = /usr/lib/php/20170718/ioncube_loader_lin_7.0.so > 00-ioncube.ini"]
+RUN service apache2 restart
 
 ## ***********************************************************************
 ##  configure Apache
@@ -91,11 +133,8 @@ RUN apt-get install -y openssl \
     && mkdir /etc/apache2/ssl \
     && openssl req -new -x509 -days 365 -sha1 -newkey rsa:1024 -nodes -keyout /etc/apache2/ssl/server.key -out /etc/apache2/ssl/server.crt -subj '/O=Company/OU=Department/CN=localhost'
 
-
 # Apache SSL install and init
 COPY config/default.conf /etc/apache2/sites-available/000-default.conf
-
-
 
 RUN wget https://phar.phpunit.de/phpunit-3.7.38.phar -O phpunit.phar \
     && chmod +x phpunit.phar \

@@ -1,5 +1,5 @@
 # docker-ubuntu16-lamp-xdebug-ssl-phpunit
-Basic ubuntu16 installation along with apache, mysql and PHP7 Added modules are Xdebug-SSL-PHPUnit
+Basic ubuntu16 installation along with apache, mysql and PHP7 Added modules are Xdebug-SSL-IonCube
 
 # Ubuntu 16 Server with PHP 7 - Apache - Mysql
 
@@ -11,13 +11,13 @@ This creates a Docker container running PHP, Apache, and Mysql on ubuntu 16
 
 I just wanted all the PHP libraries I tend to use.
 
- I also wanted to create frequently needed modules needed by developers including Xdebug, phpUnit, SSL certificate generation and access, etc.
+ I also wanted to create frequently needed modules needed by developers including Xdebug, IonCube, SSL certificate generation and access, etc.
 
 The installed Mysql server has no password in it.
 
 ## Run Example
 
-- `docker run -d -p 80:80 -p 443:443 -v devInt:/var/www/html  --name=DeveloperInterface shinigamigood/ubuntu16-lamp-xdebug-ssl-phpunit`
+- `docker run -d -p 80:80 -p 443:443 -v devInt:/var/www/html  --name=DeveloperInterface shinigamigood/ubuntu16-lamp-xdebug-ssl-ioncube`
 
 
 ## Docker Environment Variables
@@ -30,7 +30,7 @@ The installed Mysql server has no password in it.
 
 - Xdebug
 - SSL + config
-- phpUnit
+- IonCube
 - a2enmod
 
 ## PHP-7 Extensions:
