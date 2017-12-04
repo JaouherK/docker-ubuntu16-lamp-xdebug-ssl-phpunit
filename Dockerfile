@@ -2,9 +2,9 @@ FROM ubuntu:16.04
 MAINTAINER Jaouher Kharrat<kharrat_jaouher@hotmail.fr>
 
  # Build-time metadata as defined at http://label-schema.org
-    ARG BUILD_DATE
-    ARG VCS_REF
-    ARG VERSION
+    ARG BUILD_DATE=04-12-2017
+    ARG VCS_REF=R1v2
+    ARG VERSION=1.0
     LABEL org.label-schema.build-date=$BUILD_DATE \
           org.label-schema.name="docker ubuntu16 lamp-xdebug ssl phpunit " \
           org.label-schema.description="Basic ubuntu16 installation along with apache, mysql and PHP7 Added modules are Xdebug-SSL-PHPUnit" \
@@ -42,6 +42,7 @@ RUN apt-get install -y libapache2-mod-php7.0 libzend-framework-php php7.0 php7.0
     php-http php-imagick php7.0-imap php7.0-intl php7.0-json php7.0-ldap php7.0-mbstring \
     php7.0-mbstring php7.0-mcrypt php-memcache php-memcached php7.0-mysql php7.0-recode \
     php7.0-soap php-xdebug php7.0-xml php7.0-xsl php7.0-zip vim bash-completion unzip \
+    ## To install mysql while forcing the user to root and password to empty
 && { \
         echo debconf debconf/frontend select Noninteractive; \
         echo mysql-community-server mysql-community-server/data-dir \
