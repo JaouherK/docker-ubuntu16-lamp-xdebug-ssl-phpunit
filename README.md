@@ -1,5 +1,5 @@
 # docker-ubuntu16-lamp-xdebug-ssl-phpunit
-Basic ubuntu16 installation along with apache, mysql and PHP7 Added modules are Xdebug-SSL-PHPUnit
+Basic ubuntu16 installation along with apache, mysql and PHP7 Added modules are Xdebug-SSL-PHPUnit-rabbitMQ server
 
 # Ubuntu 16 Server with PHP 7 - Apache - Mysql
 
@@ -32,6 +32,8 @@ The installed Mysql server has no password in it.
 - SSL + config
 - phpUnit
 - a2enmod
+- Rabbit MQ server
+- Git
 
 ## PHP-7 Extensions:
 

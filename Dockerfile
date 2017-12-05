@@ -19,7 +19,15 @@ MAINTAINER Jaouher Kharrat<kharrat_jaouher@hotmail.fr>
 # Server update and basic install tools
 ## ***********************************************************************
 RUN apt-get update && \
-    apt-get install -y wget curl software-properties-common python3-software-properties python-software-properties unzip
+    apt-get install -y wget \
+            curl \
+            software-properties-common \
+            python3-software-properties \
+            python-software-properties \
+            unzip \
+            vim \
+            bash-completion \
+            apache2
 
 
 ## ***********************************************************************
@@ -37,11 +45,34 @@ RUN export LANG=C.UTF-8 && \
     add-apt-repository ppa:ondrej/php && \
     apt-get update
 
-RUN apt-get install -y libapache2-mod-php7.0 libzend-framework-php php7.0 php7.0-bcmath \
-    php7.0-bz2 php7.0-cgi php7.0-common php7.0-curl php7.0-fpm php7.0-gd php7.0-gmp \
-    php-http php-imagick php7.0-imap php7.0-intl php7.0-json php7.0-ldap php7.0-mbstring \
-    php7.0-mbstring php7.0-mcrypt php-memcache php-memcached php7.0-mysql php7.0-recode \
-    php7.0-soap php-xdebug php7.0-xml php7.0-xsl php7.0-zip vim bash-completion unzip \
+RUN apt-get install -y libapache2-mod-php7.0 \
+                        libzend-framework-php \
+                        php7.0 \
+                        php7.0-bcmath \
+                        php7.0-bz2 \
+                        php7.0-cgi \
+                        php7.0-common \
+                        php7.0-curl \
+                        php7.0-fpm \
+                        php7.0-gd \
+                        php7.0-gmp \
+                        php-http \
+                        php-imagick \
+                        php7.0-imap \
+                        php7.0-intl \
+                        php7.0-json \
+                        php7.0-ldap \
+                        php7.0-mbstring \
+                        php7.0-mcrypt \
+                        php-memcache \
+                        php-memcached \
+                        php7.0-mysql \
+                        php7.0-recode \
+                        php7.0-soap \
+                        php-xdebug \
+                        php7.0-xml \
+                        php7.0-xsl \
+                        php7.0-zip \
     ## To install mysql while forcing the user to root and password to empty
 && { \
         echo debconf debconf/frontend select Noninteractive; \
@@ -54,9 +85,13 @@ RUN apt-get install -y libapache2-mod-php7.0 libzend-framework-php php7.0 php7.0
         echo mysql-community-server mysql-community-server/remove-test-db \
             select true; \
     } | debconf-set-selections \
-    && apt-get install -y mysql-server apache2 python python-django \
-        python-celery rabbitmq-server git\
-    mysql-client php7.0-mysql
+    && apt-get install -y mysql-server \
+                          python \
+                          python-django \
+                          python-celery \
+                          rabbitmq-server \
+                          git\
+                          mysql-client
 
 ## ***********************************************************************
 ##  configure PHP
