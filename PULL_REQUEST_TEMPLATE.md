@@ -1,28 +1,18 @@
-# <type>: (If applied, this commit will...) <subject> (Max 50 char)
-# |<----  Using a Maximum Of 50 Characters  ---->|
+## Purpose
+_Describe the problem or feature in addition to a link to the issues._
+
+## Approach
+_How does this change address the problem?_
+
+#### Open Questions and Pre-Merge TODOs
+- [ ] Use github checklists. When solved, check the box and explain the answer.
+
+## Learning
+_Describe the research stage_
+
+_Links to blog posts, patterns, libraries or addons used to solve this problem_
+
+#### Blog Posts
+- [How to Pull Request](https://github.com/flexyford/pull-request) Github Repo with Learning focused Pull Request Template.
 
 
-# Explain why this change is being made
-# |<----   Try To Limit Each Line to a Maximum Of 72 Characters   ---->|
-
-# Provide links or keys to any relevant tickets, articles or other resources
-# Example: Github issue #23
-
-# --- COMMIT END ---
-# Type can be 
-#    feat     (new feature)
-#    fix      (bug fix)
-#    refactor (refactoring production code)
-#    style    (formatting, missing semi colons, etc; no code change)
-#    docs     (changes to documentation)
-#    test     (adding or refactoring tests; no production code change)
-#    chore    (updating grunt tasks etc; no production code change)
-# --------------------
-# Remember to
-#    Capitalize the subject line
-#    Use the imperative mood in the subject line
-#    Do not end the subject line with a period
-#    Separate subject from body with a blank line
-#    Use the body to explain what and why vs. how
-#    Can use multiple lines with "-" for bullet points in body
-00
