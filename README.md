@@ -45,6 +45,3 @@ The installed Mysql server has no password in it.
 - mcrypt
 - memcached
 - ... and a bunch of others.  Read the Dockerfile.
-
-
-Zied
